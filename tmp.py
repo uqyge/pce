@@ -1,7 +1,7 @@
 #%%
 import chaospy
 import matplotlib.pyplot as plt
-
+import numpy as np
 # %%
 normal = chaospy.Normal(mu=2, sigma=2)
 normal
@@ -44,7 +44,7 @@ plt.show()
 chaospy.approximate_moment(normal_trunc, [0])
 # %%
 from problem_formulation import joint
-
+from problem_formulation import model_solver
 # %%
 gauss_quads = [
     chaospy.generate_quadrature(order, joint, rule="gaussian") for order in range(1, 8)
@@ -68,4 +68,18 @@ for order in range(5):
     nodes, weights = sparse_grid[order]
     plt.subplot(122)
     plt.scatter(*nodes, s=weights * 1000)
+# %%
+for i in gauss_quads:
+    nodes, weights = i
+    print(nodes.shape)
+# %%
+gauss_quads[5][0].shape
+
+
+# %%
+gauss_evals = [
+    np.array([model_solver(node) for node in nodes.T]) for nodes, weights in gauss_quads
+]
+# %%
+gauss_evals[0].shape
 # %%
