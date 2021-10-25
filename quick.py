@@ -76,10 +76,34 @@ plt.show()
 approx_solver = chaospy.fit_regression(expansion, samples, evaluations)
 
 # %%
-expected = chaospy.E(approx_solver,joint)
-deviation = chaospy.Std(approx_solver,joint)
+expected = chaospy.E(approx_solver, joint)
+deviation = chaospy.Std(approx_solver, joint)
 # %%
-plt.fill_between(coordinates,expected-2*deviation,expected+2*deviation,alpha=0.2)
-plt.plot(coordinates,expected)
+plt.fill_between(
+    coordinates, expected - 2 * deviation, expected + 2 * deviation, alpha=0.2
+)
+plt.plot(coordinates, expected)
 plt.show()
+# %%
+a = ["1", "2", "3", "4"]
+# %%
+print(a)
+# %%
+print(*a)
+# %%
+[*a]
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+# %%
+x = np.linspace(1, 10, 10)
+y = x * 2
+c = [x, y]
+# %%
+plt.plot(x, y)
+
+
+# %%
+plt.plot(*c)
 # %%
